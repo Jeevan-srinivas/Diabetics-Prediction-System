@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>🩺 Diabetes Prediction System</h1>
+        <p>Enter patient details to predict diabetes risk</p>
+    </div>
+
+    <form action="/predict" method="POST">
+
+        <div class="input-group">
+            <label>Pregnancies</label>
+            <input type="number" step="any" name="pregnancies" placeholder="Enter number of pregnancies" required>
+            <small>Number of times the patient has been pregnant.</small>
+        </div>
+
+        <div class="input-group">
+            <label>Glucose Level</label>
+            <input type="number" step="any" name="glucose" placeholder="Enter glucose level" required>
+            <small>Blood glucose concentration level.</small>
+        </div>
+
+        <div class="input-group">
+            <label>Blood Pressure</label>
+            <input type="number" step="any" name="blood_pressure" placeholder="Enter blood pressure" required>
+            <small>Diastolic blood pressure (mm Hg).</small>
+        </div>
+
+        <div class="input-group">
+            <label>Skin Thickness</label>
+            <input type="number" step="any" name="skin_thickness" placeholder="Enter skin thickness" required>
+            <small>Triceps skin fold thickness (mm).</small>
+        </div>
+
+        <div class="input-group">
+            <label>Insulin</label>
+            <input type="number" step="any" name="insulin" placeholder="Enter insulin level" required>
+            <small>2-Hour serum insulin level.</small>
+        </div>
+
+        <div class="input-group">
+            <label>BMI</label>
+            <input type="number" step="any" name="bmi" placeholder="Enter BMI" required>
+            <small>Body Mass Index (weight ÷ height²).</small>
+        </div>
+
+        <div class="input-group">
+            <label>Diabetes Pedigree Function</label>
+            <input type="number" step="any" name="diabetes_pedigree" placeholder="Enter pedigree value" required>
+            <small>Indicates hereditary diabetes likelihood.</small>
+        </div>
+
+        <div class="input-group">
+            <label>Age</label>
+            <input type="number" step="any" name="age" placeholder="Enter age" required>
+            <small>Patient age in years.</small>
+        </div>
+
+        <button type="submit">Predict Diabetes</button>
+
+    </form>
+
+    {% if prediction %}
+
+    <div class="result-card">
+
+        <h2>Prediction Result</h2>
+
+        {% if prediction == "Diabetic" %}
+            <div class="result diabetic">
+                ⚠️ {{ prediction }}
+            </div>
+        {% else %}
+            <div class="result healthy">
+                ✅ {{ prediction }}
+            </div>
+        {% endif %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
